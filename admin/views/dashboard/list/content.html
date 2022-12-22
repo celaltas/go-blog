@@ -1,0 +1,42 @@
+{{define "content"}}
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">
+    Posts
+    <a href="http:/admin/add-new" class="btn btn-outline-primary float-right"
+      ><i class="fa fa-plus">Add New</i></a
+    >
+  </h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Illustration</th>
+        <th scope="col">Title</th>
+        <th scope="col">Category</th>
+        <th scope="col">Added Date</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $index, $value := .Posts }}
+      <tr>
+        <th scope="row">{{ $value.ID }}</th>
+        <td><img width="80px" src="{{ $value.Image_Url }}" alt="" /></td>
+        <td>{{ $value.Title }}</td>
+        <td>{{ getCategory $value.CategoryID }}</td>
+        <td>{{ $value.CreatedAt }}</td>
+        <td>
+          <a href="/admin/edit/{{$value.ID}}" class="btn btn-outline-warning"
+            ><i class="fa fa-pen"></i
+          ></a>
+          <a href="/admin/delete/{{$value.ID}}" class="btn btn-outline-danger"
+            ><i class="fa fa-trash"></i
+          ></a>
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+{{end}}
